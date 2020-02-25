@@ -1,0 +1,11 @@
+---
+- name: Ensure dependencies are installed
+  apt:
+    name: "{{ swap_dependencies }}"
+    state: present
+
+- include_tasks: enable.yml
+  when: swap_enabled
+
+- include_tasks: disable.yml
+  when: not swap_enabled

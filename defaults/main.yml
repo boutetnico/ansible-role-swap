@@ -1,0 +1,14 @@
+---
+swap_dependencies:
+  - procps
+  - util-linux
+
+swap_enabled: true
+
+swap_size: 1G
+
+swap_file: /swapfile
+
+# swap_swappiness: 10
+
+# swap_vfs_cache_pressure: 400

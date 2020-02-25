@@ -1,0 +1,50 @@
+---
+- name: Write swap file
+  command: fallocate -l {{ swap_size }} {{ swap_file }}
+  args:
+    creates: "{{ swap_file }}"
+  register: _fallocate
+
+- name: Set swap file permissions
+  file:
+    group: root
+    mode: 0600
+    owner: root
+    path: "{{ swap_file }}"
+
+- name: Create swap file
+  command: mkswap {{ swap_file }}
+  when: _fallocate is changed
+  register: _mkswap
+
+- name: Enable swap
+  command: swapon {{ swap_file }}
+  when:
+    - _mkswap is changed
+  tags: ["notest"]
+
+- name: Add swapfile to /etc/fstab
+  mount:
+    dump: "0"
+    fstype: swap
+    name: none
+    opts: sw
+    passno: "0"
+    src: "{{ swap_file }}"
+    state: present
+
+- name: Configure swappiness
+  sysctl:
+    name: vm.swappiness
+    reload: true
+    state: present
+    value: "{{ swap_swappiness }}"
+  when: swap_swappiness is defined
+
+- name: Configure vfs_cache_pressure
+  sysctl:
+    name: vm.vfs_cache_pressure
+    reload: true
+    state: present
+    value: "{{ swap_vfs_cache_pressure }}"
+  when: swap_vfs_cache_pressure is defined

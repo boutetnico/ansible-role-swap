@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: ansible-role-swap
+      swap_swappiness: 10
+      swap_vfs_cache_pressure: 400
