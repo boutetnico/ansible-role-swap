@@ -5,7 +5,7 @@
     state: present
 
 - include_tasks: enable.yml
-  when: swap_enabled
+  when: swap_enabled | bool
 
 - include_tasks: disable.yml
   when: not swap_enabled
