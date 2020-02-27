@@ -18,7 +18,7 @@ def test_packages_are_installed(host, name):
 
 
 @pytest.mark.parametrize('file,user,group,mode', [
-  ('/swapfile', 'root', 'root', 0o600),
+  ('/swapfile_test', 'root', 'root', 0o600),
 ])
 def test_swap_file_exist(host, file, user, group, mode):
     swap = host.file(file)
