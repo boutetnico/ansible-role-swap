@@ -13,11 +13,11 @@ platforms:
   - name: ansible-role-swap-debian-10
     image: debian:10
     privileged: true
-  - name: ansible-role-swap-ubuntu-1604
-    image: ubuntu:16.04
-    privileged: true
   - name: ansible-role-swap-ubuntu-1804
     image: ubuntu:18.04
+    privileged: true
+  - name: ansible-role-swap-ubuntu-2004
+    image: ubuntu:20.04
     privileged: true
 
 lint: |
