@@ -3,6 +3,7 @@
   apt:
     name: "{{ swap_dependencies }}"
     state: present
+    update_cache: true
 
 - include_tasks: enable.yml
   when: swap_enabled | bool
