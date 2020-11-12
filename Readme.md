@@ -1,3 +1,6 @@
+[![tests](https://github.com/boutetnico/ansible-role-swap/workflows/Test%20ansible%20role/badge.svg)](https://github.com/boutetnico/ansible-role-swap/actions?query=workflow%3A%22Test+ansible+role%22)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-boutetnico.swap-blue.svg)](https://galaxy.ansible.com/boutetnico/swap)
+
 ansible-role-swap
 =================
 
@@ -6,7 +9,7 @@ This role configures Linux swap.
 Requirements
 ------------
 
-Ansible 2.6 or newer.
+Ansible 2.7 or newer.
 
 Supported Platforms
 -------------------
@@ -19,14 +22,14 @@ Supported Platforms
 Role Variables
 --------------
 
-| Variable                     | Required | Default                         | Choices   | Comments                                      |
-|------------------------------|----------|---------------------------------|-----------|-----------------------------------------------|
-| swap_dependencies            | yes      | `[procps,util-linux]`           | list      |                                               |
-| swap_enabled                 | yes      | `true`                          | bool      |                                               |
-| swap_size                    | yes      | `1G`                            | string    |                                               |
-| swap_file                    | yes      | `/swap`                         | string    |                                               |
-| swap_swappiness              | no       |                                 | int       |                                               |
-| swap_vfs_cache_pressure      | no       |                                 | int       |                                               |
+| Variable                     | Required | Default                 | Choices   | Comments                            |
+|------------------------------|----------|-------------------------|-----------|-------------------------------------|
+| swap_dependencies            | yes      | `[procps,util-linux]`   | list      |                                     |
+| swap_enabled                 | yes      | `true`                  | bool      |                                     |
+| swap_size                    | yes      | `1G`                    | string    |                                     |
+| swap_file                    | yes      | `/swap`                 | string    |                                     |
+| swap_swappiness              | no       |                         | int       |                                     |
+| swap_vfs_cache_pressure      | no       |                         | int       |                                     |
 
 Dependencies
 ------------
