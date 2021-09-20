@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: swap
+  namespace: boutetnico
   author: Nicolas Boutet
   description: Configure Linux swap.
   license: MIT
