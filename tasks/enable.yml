@@ -13,16 +13,15 @@
     path: "{{ swap_file }}"
 
 - name: Create swap file
-  ansible.builtin.command:  # noqa no-handler
-    cmd: mkswap {{ swap_file }}
+  ansible.builtin.command: mkswap {{ swap_file }}  # noqa no-handler
   when: _fallocate is changed
   register: _mkswap
 
 - name: Enable swap
-  ansible.builtin.command:  # noqa no-handler
-    cmd: swapon {{ swap_file }}
+  ansible.builtin.command: swapon {{ swap_file }}  # noqa no-handler
   when:
     - _mkswap is changed
+  tags: ["notest"]
 
 - name: Add swapfile to /etc/fstab
   ansible.posix.mount:
