@@ -1,30 +1,30 @@
 ---
 - name: Write swap file
-  command: fallocate -l {{ swap_size }} {{ swap_file }}
+  ansible.builtin.command: fallocate -l {{ swap_size }} {{ swap_file }}
   args:
     creates: "{{ swap_file }}"
   register: _fallocate
 
 - name: Set swap file permissions
-  file:
+  ansible.builtin.file:
     group: root
     mode: 0600
     owner: root
     path: "{{ swap_file }}"
 
 - name: Create swap file
-  command: mkswap {{ swap_file }}
+  ansible.builtin.command: mkswap {{ swap_file }}
   when: _fallocate is changed
   register: _mkswap
 
 - name: Enable swap
-  command: swapon {{ swap_file }}
+  ansible.builtin.command: swapon {{ swap_file }}
   when:
     - _mkswap is changed
   tags: ["notest"]
 
 - name: Add swapfile to /etc/fstab
-  mount:
+  ansible.posix.mount:
     dump: "0"
     fstype: swap
     name: none
@@ -34,7 +34,7 @@
     state: present
 
 - name: Configure swappiness
-  sysctl:
+  ansible.posix.sysctl:
     name: vm.swappiness
     reload: true
     state: present
@@ -42,7 +42,7 @@
   when: swap_swappiness is defined
 
 - name: Configure vfs_cache_pressure
-  sysctl:
+  ansible.posix.sysctl:
     name: vm.vfs_cache_pressure
     reload: true
     state: present

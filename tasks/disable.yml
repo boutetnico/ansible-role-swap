@@ -1,11 +1,11 @@
 ---
 - name: Disable swap
-  command: swapoff -a
+  ansible.builtin.command: swapoff -a
   changed_when: false
   tags: ["notest"]
 
 - name: Add swapfile to /etc/fstab
-  mount:
+  ansible.posix.mount:
     dump: "0"
     fstype: swap
     name: none
@@ -15,6 +15,6 @@
     state: absent
 
 - name: Ensure swap file is deleted
-  file:
+  ansible.builtin.file:
     path: "{{ swap_file }}"
     state: absent

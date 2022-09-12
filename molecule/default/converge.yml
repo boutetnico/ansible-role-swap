@@ -3,7 +3,7 @@
   hosts: all
 
   roles:
-    - role: ansible-role-swap
+    - role: boutetnico.swap
       swap_size: 128M
       swap_file: /swapfile_test
       swap_swappiness: 10
