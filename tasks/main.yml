@@ -1,6 +1,6 @@
 ---
 - name: Ensure dependencies are installed
-  apt:
+  ansible.builtin.apt:
     name: "{{ swap_dependencies }}"
     state: present
     update_cache: true
