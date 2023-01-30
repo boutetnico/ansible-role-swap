@@ -5,8 +5,10 @@
     state: present
     update_cache: true
 
-- include_tasks: enable.yml
+- name: Include tasks to enable swap
+  ansible.builtin.include_tasks: enable.yml
   when: swap_enabled | bool
 
-- include_tasks: disable.yml
+- name: Include tasks to disable swap
+  ansible.builtin.include_tasks: disable.yml
   when: not swap_enabled
