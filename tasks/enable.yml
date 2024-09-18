@@ -16,12 +16,11 @@
   ansible.builtin.command: mkswap {{ swap_file }}  # noqa no-handler
   changed_when: false
   when: _fallocate is changed
-  register: _mkswap
 
 - name: Enable swap
   ansible.builtin.command: swapon {{ swap_file }}  # noqa no-handler
-  when: _mkswap is changed
   changed_when: false
+  when: _fallocate is changed
   tags: ["notest"]
 
 - name: Add swapfile to /etc/fstab
