@@ -40,3 +40,16 @@ def test_swap_file_exist(host, file, user, group, mode):
 def test_sysctl_values(host, key, expected_value):
     value = host.sysctl(key)
     assert expected_value == value
+
+
+def test_swap_in_fstab(host):
+    fstab = host.file("/etc/fstab")
+    assert "/swapfile_test" in fstab.content_string
+    assert "swap" in fstab.content_string
+    assert "sw" in fstab.content_string
+
+
+def test_swap_is_active(host):
+    cmd = host.run("swapon --show")
+    assert cmd.rc == 0
+    assert cmd.stdout.strip() != ""
